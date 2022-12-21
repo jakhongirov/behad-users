@@ -1,0 +1,75 @@
+.register__input__box {
+    display: flex;
+    width: 100%;
+    max-width: 380px;
+    justify-content: space-between;
+}
+
+.login__input__box--select {
+    width: 120px;
+}
+
+.login__input__box--width {
+    max-width: 180px;
+}
+
+.login__phone__input--select:valid {
+    display: block;
+    width: 100%;
+    max-width: 120px;
+    border: 2px solid #373d45 !important;
+}
+
+.login__phone__input--select option {
+    color: #373d45;
+}
+
+.login__phone__input--select--width {
+    max-width: 400px !important;
+    margin-bottom: 16px;
+}
+
+.login__phone__input--danger {
+    border: 2px solid red !important;
+}
+
+.login__phone_label--danger {
+    color: red;
+}
+
+.login__phone__input--danger:valid ~ .login__phone_label--danger,
+.login__phone__input--danger:focus ~ .login__phone_label--danger {
+    background-color: red !important;
+    color: #fff;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    padding: 12px 16px;
+    background: transparent;
+    border: 2px solid #373d45;
+    border-radius: 6px;
+    outline: none;
+    font-family: "DINOT-Regular";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #ffffff;
+}
+
+.special-label {
+    display: none;
+}
+
+.form-control:focus,
+.form-control:valid {
+    background: transparent;
+    border: 2px solid #0496ff;
+}
+
+.form-control:hover{
+    border: 2px solid #ffffff;
+}
