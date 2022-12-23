@@ -40,7 +40,7 @@ function Login() {
             redirect: 'follow',
         };
 
-        fetch('http://192.168.7.168:8000/api/login/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
+        fetch('https://4066-195-158-2-126.eu.ngrok.io/api/login/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 401) {
