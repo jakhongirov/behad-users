@@ -81,7 +81,7 @@ function Login() {
 
                                 <Link
                                     className="login__link"
-                                    to={'/forget' + "/" + temptoken + "/" + key + "/" + notification_token}>
+                                    to={`/forget/${temptoken}/${key}/${notification_token}`}>
                                     Parolni unutdingizmi?
                                 </Link>
 
@@ -89,7 +89,7 @@ function Login() {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => navigate('/register' + "/" + temptoken + "/" + key + "/" + notification_token)}>Ro'yxatdan o'tish</span></p>
+                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => navigate(`/register/${temptoken}/${key}/${notification_token}`)}>Ro'yxatdan o'tish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>
