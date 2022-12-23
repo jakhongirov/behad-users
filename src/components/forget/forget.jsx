@@ -95,7 +95,7 @@ function Forget() {
             redirect: 'follow',
         };
 
-        fetch('http://192.168.7.168:8000/api/forgetPassword/sms', requestOptions)
+        fetch("http://192.168.7.168:8000/api/forgetPassword/sms", requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -183,12 +183,12 @@ function Forget() {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => navigate('/register' + "/" + temptoken + "/" + key + "/" + notification_token)}>Ro'yxatdan o'tish</span></p>
+                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => navigate(`/register/${temptoken}/${key}/${notification_token}`)}>Ro'yxatdan o'tish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>
                         <img className='image_check' src={Check} alt="check icon" />
-                        <h2 className='login__title login__title--size'>Parol muafaqiyatli tiklandi, <span className='login__span' onClick={() => navigate("/" + temptoken + "/" + key + "/" + notification_token)}>Kirish</span>ga qaytishingiz mumkin!</h2>
+                        <h2 className='login__title login__title--size'>Parol muafaqiyatli tiklandi, <span className='login__span' onClick={() => navigate(`/${temptoken}/${key}/${notification_token}`)}>Kirish</span>ga qaytishingiz mumkin!</h2>
                         <p></p>
                     </div>
                 </div>
