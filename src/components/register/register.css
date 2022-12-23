@@ -1,23 +1,30 @@
 .register__input__box {
     display: flex;
     width: 100%;
-    max-width: 380px;
+    /* max-width: 380px; */
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
 .login__input__box--select {
     width: 120px;
+    margin: 0;
 }
 
 .login__input__box--width {
-    max-width: 180px;
+    margin: 0 !important;
+    /* margin-bottom: px; */
+    max-width: 40%;
 }
 
 .login__phone__input--select:valid {
     display: block;
     width: 100%;
     max-width: 120px;
-    border: 2px solid #373d45 !important;
+    padding: 14px;
+    border: none !important;
+    background: rgba(128, 128, 128, 0.2);
 }
 
 .login__phone__input--select option {
@@ -48,8 +55,8 @@
     width: 100%;
     max-width: 340px;
     padding: 12px 16px;
-    background: transparent;
-    border: 2px solid #373d45;
+    background: rgba(128, 128, 128, 0.2);
+    border: none;
     border-radius: 6px;
     outline: none;
     font-family: "DINOT-Regular";
@@ -57,7 +64,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
-    color: #ffffff;
+    color: #000;
 }
 
 .special-label {
@@ -71,5 +78,5 @@
 }
 
 .form-control:hover{
-    border: 2px solid #ffffff;
+    border: 2px solid #000;
 }

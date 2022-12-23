@@ -1,15 +1,18 @@
 import './register.css'
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 
+import Check from "../../assets/image/check_circle.svg"
+
 function Register() {
+    const navigate = useNavigate()
     const { temptoken, key, notification_token } = useParams()
     const [err, setErr] = useState(false)
+    const [err2, setErr2] = useState(false)
     const [location, setLocation] = useState()
     const [state, setState] = useState()
-
-    console.log(temptoken, key, notification_token);
+    const [modal, setModal] = useState(false)
 
     useEffect(() => {
         fetch('https://ipapi.co/json')
@@ -44,9 +47,17 @@ function Register() {
                 redirect: 'follow',
             };
 
-            fetch('http://192.168.7.168:8000/api/register/' + key + "/" + temptoken + "/" + notification_token, requestOptions)
+            fetch('http://192.168.7.168:8000/api/register/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
                 .then((response) => response.json())
-                .then((data) => data.status === 401 ? setErr(true) : setErr(false), console.log(200))
+                .then((data) => {
+                    if (data.status === 401) {
+                        setErr(true)
+                    } else if (data.status === 302) {
+                        setErr2(true)
+                    } else if (data.status === 200) {
+                        setModal(true)
+                    }
+                })
                 .catch((error) => console.log('error', error))
         } else {
             setErr(true)
@@ -57,59 +68,71 @@ function Register() {
         <>
             <section className='login'>
                 <div className='container'>
-                    <div className='login__box'>
-                        <h1 className='login__title'>Log in to continue</h1>
-                        <form autoComplete='off' onSubmit={HandleSubmit}>
-                            <div className='login__input__box'>
-                                <input className='login__phone__input' id='name' type="text" name='name' required />
-                                <label className="login__phone_label" htmlFor="name">
-                                    Name
-                                </label>
-                            </div>
-                            <div className='login__input__box'>
-                                <input className='login__phone__input' id='surname' type="text" name='surname' required />
-                                <label className="login__phone_label" htmlFor="surname">
-                                    Surname
-                                </label>
-                            </div>
-
-                            <div className='register__input__box'>
-                                <div className='login__input__box login__input__box--width'>
-                                    <input className='login__phone__input' id='age' type="number" name='age' required min={1} max={99} />
-                                    <label className="login__phone_label" htmlFor="age">
-                                        Age
+                    <div className={!modal ? 'login__box' : "close"}>
+                        <h1 className='login__title'>Ro'yxatdan o'tish</h1>
+                        <p className='login__text'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div className='login__form__box'>
+                            <form autoComplete='off' onSubmit={HandleSubmit}>
+                                <div className='login__input__box'>
+                                    <input className='login__phone__input' id='name' type="text" name='name' required />
+                                    <label className="login__phone_label" htmlFor="name">
+                                        Ism
                                     </label>
                                 </div>
-                                <div className='login__input__box login__input__box--select'>
-                                    <select className='login__phone__input login__phone__input--select' name="who" required>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
+                                <div className='login__input__box'>
+                                    <input className='login__phone__input' id='surname' type="text" name='surname' required />
+                                    <label className="login__phone_label" htmlFor="surname">
+                                        Familiya
+                                    </label>
                                 </div>
-                            </div>
 
-                            <div className='login__input__box'>
-                                <PhoneInput
-                                    country={location?.country_code.toLowerCase()}
-                                    value={state?.phone}
-                                    onChange={phone => setState(phone)}
-                                />
-                            </div>
-                            <div className='login__input__box'>
-                                <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' required maxLength={6} />
-                                <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password">
-                                    Password
-                                </label>
-                            </div>
-                            <div className='login__input__box'>
-                                <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password_again' type="password" name='password_again' required maxLength={6} />
-                                <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password_again">
-                                    Again password
-                                </label>
-                            </div>
+                                <div className='register__input__box'>
+                                    <div className='login__input__box login__input__box--width'>
+                                        <input className='login__phone__input' id='age' type="number" name='age' required min={1} max={99} />
+                                        <label className="login__phone_label" htmlFor="age">
+                                            Yosh
+                                        </label>
+                                    </div>
+                                    <div className='login__input__box login__input__box--select'>
+                                        <select className='login__phone__input login__phone__input--select' name="who" required>
+                                            <option value="" disabled>Jins</option>
+                                            <option value="male">Erkak</option>
+                                            <option value="female">Ayol</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                            <button className='login__btn'>Sign Up</button>
-                        </form>
+                                <div className='login__input__box'>
+                                    <PhoneInput
+                                        country={location?.country_code.toLowerCase()}
+                                        value={state?.phone}
+                                        onChange={phone => setState(phone)}
+                                    />
+                                    <span className={err2 ? 'forget__error__span' : 'close'}>{err2 ? "Telefon raqami ro'yhatdan o'tgan" : ""}</span>
+                                </div>
+                                <div className='login__input__box'>
+                                    <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' required autoCapitalize='off' minLength={6} />
+                                    <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password">
+                                        Parol
+                                    </label>
+                                </div>
+                                <div className='login__input__box'>
+                                    <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password_again' type="password" name='password_again' autoCapitalize='off' required minLength={6} />
+                                    <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password_again">
+                                        Parol qayta yozing
+                                    </label>
+                                </div>
+
+                                <button className='login__btn'>Ro'yxatdan o'tish</button>
+                            </form>
+                        </div>
+
+                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => navigate("/" + temptoken + "/" + key + "/" + notification_token)}>Kirish</span></p>
+                    </div>
+
+                    <div className={modal ? 'login__box' : "close"}>
+                        <img className='image_check' src={Check} alt="check icon" />
+                        <h2 className='login__title'>Kirish muafaqiyatli bajarildi, ilovaga qaytishingiz mumkin!</h2>
                     </div>
                 </div>
             </section>
