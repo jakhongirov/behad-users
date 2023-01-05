@@ -6,7 +6,7 @@ import Register from './components/register/register';
 import Forget from './components/forget/forget';
 
 function App() {
-  
+
   return (
     <Routes>
       <Route path="/:temptoken/:key/:notification_token" element={< Login />} />

@@ -61,7 +61,7 @@ function Forget() {
             redirect: 'follow',
         };
 
-        fetch('https://4066-195-158-2-126.eu.ngrok.io/api/forgetPassword/phone', requestOptions)
+        fetch('http://users.behat.uz/api/forgetPassword/phone', requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 404) {

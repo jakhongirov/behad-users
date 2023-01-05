@@ -40,7 +40,7 @@ function Login() {
             redirect: 'follow',
         };
 
-        fetch('https://4066-195-158-2-126.eu.ngrok.io/api/login/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
+        fetch('http://users.behat.uz/api/login/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 401) {
@@ -94,7 +94,7 @@ function Login() {
 
                     <div className={modal ? 'login__box' : "close"}>
                         <img className='image_check' src={Check} alt="check icon" />
-                        <h2 className='login__title login__title--size'>Kirish muafaqiyatli bajarildi, ilovaga qaytishingiz mumkin!</h2>
+                        <h2 className='login__title login__title--size'>Kirish muaffaqiyatli bajarildi, ilovaga qaytishingiz mumkin!</h2>
                     </div>
                 </div>
             </section>

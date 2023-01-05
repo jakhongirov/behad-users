@@ -36,8 +36,8 @@ function Register() {
                 who: who.value.trim(),
                 phone: state.trim(),
                 password: password.value.trim().toLowerCase(),
-                country: location.country_name,
-                capital: location.country_capital,
+                country: location?.country,
+                capital: location?.country_capital,
             });
 
             const requestOptions = {
@@ -47,7 +47,7 @@ function Register() {
                 redirect: 'follow',
             };
 
-            fetch('https://4066-195-158-2-126.eu.ngrok.io/api/register/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
+            fetch('http://users.behat.uz/api/register/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.status === 401) {
@@ -76,28 +76,28 @@ function Register() {
                                 <div className='login__input__box'>
                                     <input className='login__phone__input' id='name' type="text" name='name' required />
                                     <label className="login__phone_label" htmlFor="name">
-                                        Ism
+                                        Ism *
                                     </label>
                                 </div>
                                 <div className='login__input__box'>
                                     <input className='login__phone__input' id='surname' type="text" name='surname' required />
                                     <label className="login__phone_label" htmlFor="surname">
-                                        Familiya
+                                        Familiya *
                                     </label>
                                 </div>
 
                                 <div className='register__input__box'>
                                     <div className='login__input__box login__input__box--width'>
-                                        <input className='login__phone__input' id='age' type="number" name='age' required min={1} max={99} />
+                                        <input className='login__phone__input' id='age' type="number" name='age' placeholder='' min={1} max={99} />
                                         <label className="login__phone_label" htmlFor="age">
-                                            Yosh
+                                            Yosh 
                                         </label>
                                     </div>
                                     <div className='login__input__box login__input__box--select'>
-                                        <select className='login__phone__input login__phone__input--select' name="who" required>
+                                        <select className='login__phone__input login__phone__input--select' name="who">
                                             <option value="" disabled>Jins</option>
-                                            <option value="male">Erkak</option>
-                                            <option value="female">Ayol</option>
+                                            <option value="erkak">Erkak</option>
+                                            <option value="ayol">Ayol</option>
                                         </select>
                                     </div>
                                 </div>
@@ -113,13 +113,13 @@ function Register() {
                                 <div className='login__input__box'>
                                     <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' required autoCapitalize='off' minLength={6} />
                                     <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password">
-                                        Parol
+                                        Parol *
                                     </label>
                                 </div>
                                 <div className='login__input__box'>
                                     <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password_again' type="password" name='password_again' autoCapitalize='off' required minLength={6} />
                                     <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password_again">
-                                        Parol qayta yozing
+                                        Parol qayta yozing *
                                     </label>
                                 </div>
 
@@ -127,12 +127,12 @@ function Register() {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => navigate("/" + temptoken + "/" + key + "/" + notification_token)}>Kirish</span></p>
+                        <p className='login__text'>Akkountingiz bormi ? <span className='login__span' onClick={() => navigate("/" + temptoken + "/" + key + "/" + notification_token)}>Kirish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>
                         <img className='image_check' src={Check} alt="check icon" />
-                        <h2 className='login__title'>Kirish muafaqiyatli bajarildi, ilovaga qaytishingiz mumkin!</h2>
+                        <h2 className='login__title'>Kirish muaffaqiyatli bajarildi, ilovaga qaytishingiz mumkin!</h2>
                     </div>
                 </div>
             </section>

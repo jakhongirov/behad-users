@@ -18,6 +18,10 @@
     max-width: 40%;
 }
 
+.login__input__box--width:valid {
+    border: none !important;
+}
+
 .login__phone__input--select:valid {
     display: block;
     width: 100%;
