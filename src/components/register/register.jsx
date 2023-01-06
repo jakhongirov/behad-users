@@ -21,6 +21,11 @@ function Register() {
             .catch(e => console.log(e))
     }, [])
 
+    const closeTab = () => {
+        window.opener = null;
+        window.open('', '_self', '');
+        window.close();
+    };
     const HandleSubmit = (e) => {
         e.preventDefault();
         const { name, surname, age, who, password, password_again } = e.target.elements
@@ -47,7 +52,7 @@ function Register() {
                 redirect: 'follow',
             };
 
-            fetch('http://users.behat.uz/api/register/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
+            fetch('http://users.behad.uz/api/v1/register/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.status === 401) {
@@ -56,6 +61,7 @@ function Register() {
                         setErr2(true)
                     } else if (data.status === 200) {
                         setModal(true)
+                        closeTab();
                     }
                 })
                 .catch((error) => console.log('error', error))
@@ -90,7 +96,7 @@ function Register() {
                                     <div className='login__input__box login__input__box--width'>
                                         <input className='login__phone__input' id='age' type="number" name='age' placeholder='' min={1} max={99} />
                                         <label className="login__phone_label" htmlFor="age">
-                                            Yosh 
+                                            Yosh
                                         </label>
                                     </div>
                                     <div className='login__input__box login__input__box--select'>

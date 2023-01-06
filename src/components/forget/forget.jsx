@@ -61,7 +61,7 @@ function Forget() {
             redirect: 'follow',
         };
 
-        fetch('http://users.behat.uz/api/forgetPassword/phone', requestOptions)
+        fetch('http://users.behad.uz/api/v1/forgetPassword/phone', requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 404) {

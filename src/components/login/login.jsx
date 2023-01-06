@@ -21,6 +21,12 @@ function Login() {
             .catch(e => console.log(e))
     }, [])
 
+    const closeTab = () => {
+        window.opener = null;
+        window.open('', '_blank', '');
+        window.close();
+      };
+
     const HandleSubmit = (e) => {
         e.preventDefault();
         const { password } = e.target.elements
@@ -40,19 +46,21 @@ function Login() {
             redirect: 'follow',
         };
 
-        fetch('http://users.behat.uz/api/login/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
+        fetch('http://users.behad.uz/api/v1/login/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 401) {
                     setErr(true)
                 } else if (data.status === 200) {
                     setModal(true)
+                    closeTab();
                 } else if (data.status === 404) {
                     setErr1(true)
                 }
             })
             .catch((error) => console.log('error', error))
     }
+
 
     return (
         <>
