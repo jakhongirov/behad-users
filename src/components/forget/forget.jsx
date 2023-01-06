@@ -95,7 +95,7 @@ function Forget() {
             redirect: 'follow',
         };
 
-        fetch("https://4066-195-158-2-126.eu.ngrok.io/api/forgetPassword/sms", requestOptions)
+        fetch("http://users.behad.uz/api/v1/forgetPassword/sms", requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -134,7 +134,7 @@ function Forget() {
                 redirect: 'follow',
             };
 
-            fetch('https://4066-195-158-2-126.eu.ngrok.io/api/forgetPassword/password', requestOptions)
+            fetch('http://users.behad.uz/api/v1/forgetPassword/password', requestOptions)
                 .then((response) => response.json())
                 .then((data) => data.status === 401 ? setErr(true) : setErr(false), setModal(true), console.log(200))
                 .catch((error) => console.log('error', error))
