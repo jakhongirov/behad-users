@@ -23,7 +23,7 @@ function Login() {
 
     const closeTab = () => {
         window.opener = null;
-        window.open('', '_blank', '');
+        window.open("", "_self");
         window.close();
       };
 
