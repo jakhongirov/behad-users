@@ -15,6 +15,7 @@ function Forget() {
     const [location, setLocation] = useState()
     const [state, setState] = useState()
     const [modal, setModal] = useState(false)
+    const [bot, setBot] = useState(false)
     const [seconds, setSeconds] = useState(120);
     const timerId = useRef();
 
@@ -61,19 +62,23 @@ function Forget() {
             redirect: 'follow',
         };
 
-        fetch('http://users.behad.uz/api/v1/forgetPassword/phone', requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.status === 404) {
-                    setErr1(true)
-                } else if (data.status === 200) {
-                    setPhone(true)
-                    setErr(false)
-                } else {
-                    console.log(data);
-                }
-            })
-            .catch((error) => console.log('error', error))
+        if (location?.country_code === "UZ" && state.split('').slice(0, 3).join('') === '998') {
+            fetch('http://users.behad.uz/api/v1/forgetPassword/phone', requestOptions)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status === 404) {
+                        setErr1(true)
+                    } else if (data.status === 200) {
+                        setPhone(true)
+                        setErr(false)
+                    } else {
+                        console.log(data);
+                    }
+                })
+                .catch((error) => console.log('error', error))
+        } else {
+            setBot(true)
+        }
     }
 
     const HandleSubmitMessage = (e) => {
@@ -145,7 +150,7 @@ function Forget() {
         <>
             <section className='login'>
                 <div className='container'>
-                    <div className={!modal ? 'login__box' : "close"}>
+                    <div className={!bot && !modal ? 'login__box' : "close"}>
                         <h1 className='login__title'>Parolni tiklash!</h1>
                         <p className='login__text'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         <div className='login__form__box'>
@@ -189,7 +194,12 @@ function Forget() {
                     <div className={modal ? 'login__box' : "close"}>
                         <img className='image_check' src={Check} alt="check icon" />
                         <h2 className='login__title login__title--size'>Parol muafaqiyatli tiklandi, <span className='login__span' onClick={() => navigate(`/${temptoken}/${key}/${notification_token}`)}>Kirish</span>ga qaytishingiz mumkin!</h2>
-                        <p></p>
+                    </div>
+
+                    <div className={bot ? 'login__box' : "close"}>
+                        <h2 className='login__title login__title--size'>
+                            Telefon raqamingiz yoki Location UZ bo'lmagani uchun <span className='login__span' onClick={() => navigate("https://t.me/jakhongirov_1")}>Telegram botga</span> kiring!
+                        </h2>
                     </div>
                 </div>
             </section>
