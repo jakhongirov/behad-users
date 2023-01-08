@@ -52,7 +52,7 @@ function Forget() {
         myHeaders.append('Content-Type', 'application/json');
 
         const raw = JSON.stringify({
-            phone: state,
+            phone: `+${state}`
         });
 
         const requestOptions = {
@@ -89,7 +89,7 @@ function Forget() {
         myHeaders.append('Content-Type', 'application/json');
 
         const raw = JSON.stringify({
-            phone: state.trim(),
+            phone: `+${state}`,
             sms: sms.value.trim()
         });
 
@@ -128,7 +128,7 @@ function Forget() {
             myHeaders.append('Content-Type', 'application/json');
 
             const raw = JSON.stringify({
-                phone: state.trim(),
+                phone: `+${state}`,
                 password: password.value.trim()
             });
 
@@ -198,7 +198,7 @@ function Forget() {
 
                     <div className={bot ? 'login__box' : "close"}>
                         <h2 className='login__title login__title--size'>
-                            Telefon raqamingiz yoki Location UZ bo'lmagani uchun <span className='login__span' onClick={() => navigate("https://t.me/jakhongirov_1")}>Telegram botga</span> kiring!
+                            Telefon raqamingiz yoki Location UZ bo'lmagani uchun <a className='login__span' href="https://t.me/behad_support_bot">Telegram botga</a> kiring!
                         </h2>
                     </div>
                 </div>

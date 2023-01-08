@@ -39,7 +39,7 @@ function Register() {
                 surname: surname.value.trim(),
                 age: age.value.trim(),
                 who: who.value.trim(),
-                phone: state.trim(),
+                phone: `+${state}`,
                 password: password.value.trim().toLowerCase(),
                 country: location?.country,
                 capital: location?.country_capital,

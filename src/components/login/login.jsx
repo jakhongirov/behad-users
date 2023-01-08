@@ -35,7 +35,7 @@ function Login() {
         myHeaders.append('Content-Type', 'application/json');
 
         const raw = JSON.stringify({
-            phone: state.trim(),
+            phone: `+${state}`,
             password: password.value.trim().toLowerCase(),
         });
 
