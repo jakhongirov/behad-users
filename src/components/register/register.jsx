@@ -1,13 +1,10 @@
 import './register.css'
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 
 import Check from "../../assets/image/check_circle.svg"
 
-function Register() {
-    const navigate = useNavigate()
-    const { temptoken, key, notification_token } = useParams()
+function Register({ temptoken, app_key, notification_token, setPage }) {
     const [err, setErr] = useState(false)
     const [err2, setErr2] = useState(false)
     const [location, setLocation] = useState()
@@ -38,7 +35,7 @@ function Register() {
             const raw = JSON.stringify({
                 name: name.value.trim(),
                 surname: surname.value.trim(),
-                age: age.value.trim(),
+                age: age.value.trim() ? age.value.trim() : 0,
                 who: who.value.trim(),
                 phone: `+${state}`,
                 password: password.value.trim().toLowerCase(),
@@ -53,9 +50,10 @@ function Register() {
                 redirect: 'follow',
             };
 
-            fetch('http://users.behad.uz/api/v1/register/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
+            fetch('http://users.behad.uz/api/v1/register/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
                 .then((response) => response.json())
                 .then((data) => {
+                    console.log(data);
                     if (data.status === 401) {
                         setErr(true)
                     } else if (data.status === 302) {
@@ -134,7 +132,7 @@ function Register() {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz bormi ? <span className='login__span' onClick={() => navigate("/" + temptoken + "/" + key + "/" + notification_token)}>Kirish</span></p>
+                        <p className='login__text'>Akkountingiz bormi ? <span className='login__span' onClick={() => setPage(true)}>Kirish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>

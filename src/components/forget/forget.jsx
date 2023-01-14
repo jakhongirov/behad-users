@@ -1,13 +1,12 @@
 import "./forget.css"
 import { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 
 import Check from "../../assets/image/check_circle.svg"
 
-function Forget() {
+function Forget({ setPage }) {
     const navigate = useNavigate()
-    const { temptoken, key, notification_token } = useParams()
     const [err, setErr] = useState(false)
     const [err1, setErr1] = useState(false)
     const [phone, setPhone] = useState(false)
@@ -188,12 +187,12 @@ function Forget() {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => navigate(`/register/${temptoken}/${key}/${notification_token}`)}>Ro'yxatdan o'tish</span></p>
+                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => { navigate(-1); setPage(false) }}>Ro'yxatdan o'tish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>
                         <img className='image_check' src={Check} alt="check icon" />
-                        <h2 className='login__title login__title--size'>Parol muafaqiyatli tiklandi, <span className='login__span' onClick={() => navigate(`/${temptoken}/${key}/${notification_token}`)}>Kirish</span>ga qaytishingiz mumkin!</h2>
+                        <h2 className='login__title login__title--size'>Parol muafaqiyatli tiklandi, <span className='login__span' onClick={() => { navigate(-1); setPage(true) }}>Kirish</span>ga qaytishingiz mumkin!</h2>
                     </div>
 
                     <div className={bot ? 'login__box' : "close"}>

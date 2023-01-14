@@ -1,15 +1,13 @@
 import './login.css'
-import { useNavigate, useParams, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import PhoneInput from 'react-phone-input-2'
 
 import Check from "../../assets/image/check_circle.svg"
 
-function Login() {
-    const { temptoken, key, notification_token } = useParams()
+function Login({ temptoken, app_key, notification_token, setPage }) {
     const [err, setErr] = useState(false)
     const [err1, setErr1] = useState(false)
-    const navigate = useNavigate()
     const [location, setLocation] = useState()
     const [state, setState] = useState()
     const [modal, setModal] = useState(false)
@@ -46,7 +44,7 @@ function Login() {
             redirect: 'follow',
         };
 
-        fetch('http://users.behad.uz/api/v1/login/' + temptoken + "/" + key + "/" + notification_token, requestOptions)
+        fetch('http://users.behad.uz/api/v1/login/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 401) {
@@ -54,7 +52,6 @@ function Login() {
                 } else if (data.status === 200) {
                     setModal(true)
                     closeTab();
-                    console.log("b");
                 } else if (data.status === 404) {
                     setErr1(true)
                 }
@@ -90,7 +87,7 @@ function Login() {
 
                                 <Link
                                     className="login__link"
-                                    to={`/forget/${temptoken}/${key}/${notification_token}`}>
+                                    to={`/forget/${temptoken}/${app_key}/${notification_token}`}>
                                     Parolni unutdingizmi?
                                 </Link>
 
@@ -98,7 +95,7 @@ function Login() {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => navigate(`/register/${temptoken}/${key}/${notification_token}`)}>Ro'yxatdan o'tish</span></p>
+                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => setPage(false)}>Ro'yxatdan o'tish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>
