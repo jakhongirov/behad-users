@@ -102,7 +102,7 @@ function Register() {
                                     </div>
                                     <div className='login__input__box login__input__box--select'>
                                         <select className='login__phone__input login__phone__input--select' name="who">
-                                            <option value="" disabled>Jins</option>
+                                            <option value="all">Jinsi</option>
                                             <option value="erkak">Erkak</option>
                                             <option value="ayol">Ayol</option>
                                         </select>
