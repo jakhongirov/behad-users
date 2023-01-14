@@ -128,7 +128,7 @@ function Forget() {
             myHeaders.append('Content-Type', 'application/json');
 
             const raw = JSON.stringify({
-                phone: `+${state}`,
+                phone: state,
                 password: password.value.trim()
             });
 
