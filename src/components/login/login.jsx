@@ -23,9 +23,9 @@ function Login() {
 
     const closeTab = () => {
         window.opener = null;
-        window.open("", "_self");
+        window.open('', '_self');
         window.close();
-      };
+    };
 
     const HandleSubmit = (e) => {
         e.preventDefault();
@@ -54,6 +54,7 @@ function Login() {
                 } else if (data.status === 200) {
                     setModal(true)
                     closeTab();
+                    console.log("b");
                 } else if (data.status === 404) {
                     setErr1(true)
                 }
