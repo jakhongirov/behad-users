@@ -23,9 +23,10 @@ function Register() {
 
     const closeTab = () => {
         window.opener = null;
-        window.open("", "_self");
+        window.open('', '_self');
         window.close();
     };
+
     const HandleSubmit = (e) => {
         e.preventDefault();
         const { name, surname, age, who, password, password_again } = e.target.elements
