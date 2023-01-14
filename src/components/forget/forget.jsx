@@ -52,7 +52,7 @@ function Forget() {
         myHeaders.append('Content-Type', 'application/json');
 
         const raw = JSON.stringify({
-            phone: `+${state}`
+            phone: state
         });
 
         const requestOptions = {
@@ -89,7 +89,7 @@ function Forget() {
         myHeaders.append('Content-Type', 'application/json');
 
         const raw = JSON.stringify({
-            phone: `+${state}`,
+            phone: state,
             sms: sms.value.trim()
         });
 
