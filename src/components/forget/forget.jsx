@@ -39,7 +39,7 @@ function Forget({ setPage }) {
     }, [seconds])
 
     useEffect(() => {
-        fetch('https://ipapi.co/json')
+        fetch('httpss://ipapi.co/json')
             .then(res => res.json())
             .then(data => setLocation(data))
             .catch(e => console.log(e))
@@ -62,7 +62,7 @@ function Forget({ setPage }) {
         };
 
         if (location?.country_code === "UZ" && state.split('').slice(0, 3).join('') === '998') {
-            fetch('http://users.behad.uz/api/v1/forgetPassword/phone', requestOptions)
+            fetch('https://users.behad.uz/api/v1/forgetPassword/phone', requestOptions)
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.status === 404) {
@@ -99,7 +99,7 @@ function Forget({ setPage }) {
             redirect: 'follow',
         };
 
-        fetch("http://users.behad.uz/api/v1/forgetPassword/sms", requestOptions)
+        fetch("https://users.behad.uz/api/v1/forgetPassword/sms", requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -138,7 +138,7 @@ function Forget({ setPage }) {
                 redirect: 'follow',
             };
 
-            fetch('http://users.behad.uz/api/v1/forgetPassword/password', requestOptions)
+            fetch('https://users.behad.uz/api/v1/forgetPassword/password', requestOptions)
                 .then((response) => response.json())
                 .then((data) => data.status === 401 ? setErr(true) : setErr(false), setModal(true), console.log(200))
                 .catch((error) => console.log('error', error))
@@ -197,7 +197,7 @@ function Forget({ setPage }) {
 
                     <div className={bot ? 'login__box' : "close"}>
                         <h2 className='login__title login__title--size'>
-                            Telefon raqamingiz yoki Location UZ bo'lmagani uchun <a className='login__span' href="https://t.me/behad_support_bot">Telegram botga</a> kiring!
+                            Telefon raqamingiz yoki Location UZ bo'lmagani uchun <a className='login__span' href="httpss://t.me/behad_support_bot">Telegram botga</a> kiring!
                         </h2>
                     </div>
                 </div>

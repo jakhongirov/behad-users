@@ -13,7 +13,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        fetch('https://ipapi.co/json')
+        fetch('httpss://ipapi.co/json')
             .then(res => res.json())
             .then(data => setLocation(data))
             .catch(e => console.log(e))
@@ -44,7 +44,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
             redirect: 'follow',
         };
 
-        fetch('http://users.behad.uz/api/v1/login/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
+        fetch('https://users.behad.uz/api/v1/login/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 401) {

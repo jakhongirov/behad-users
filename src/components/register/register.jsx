@@ -12,7 +12,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        fetch('https://ipapi.co/json')
+        fetch('httpss://ipapi.co/json')
             .then(res => res.json())
             .then(data => setLocation(data))
             .catch(e => console.log(e))
@@ -50,7 +50,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                 redirect: 'follow',
             };
 
-            fetch('http://users.behad.uz/api/v1/register/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
+            fetch('https://users.behad.uz/api/v1/register/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data);
