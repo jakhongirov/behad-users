@@ -39,7 +39,7 @@ function Forget({ setPage }) {
     }, [seconds])
 
     useEffect(() => {
-        fetch('httpss://ipapi.co/json')
+        fetch('https://ipapi.co/json')
             .then(res => res.json())
             .then(data => setLocation(data))
             .catch(e => console.log(e))

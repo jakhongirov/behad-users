@@ -13,7 +13,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        fetch('httpss://ipapi.co/json')
+        fetch('https://ipapi.co/json')
             .then(res => res.json())
             .then(data => setLocation(data))
             .catch(e => console.log(e))
