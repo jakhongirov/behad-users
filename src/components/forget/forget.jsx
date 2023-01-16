@@ -49,6 +49,8 @@ function Forget({ setPage }) {
         e.preventDefault();
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Access-Control-Allow-Origin', 'https://behad.uz');
+
 
         const raw = JSON.stringify({
             phone: state
@@ -86,6 +88,7 @@ function Forget({ setPage }) {
 
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Access-Control-Allow-Origin', 'https://behad.uz');
 
         const raw = JSON.stringify({
             phone: state,
@@ -125,6 +128,8 @@ function Forget({ setPage }) {
         if (password.value.trim() === password_again.value.trim()) {
             const myHeaders = new Headers();
             myHeaders.append('Content-Type', 'application/json');
+            myHeaders.append('Access-Control-Allow-Origin', 'https://behad.uz');
+
 
             const raw = JSON.stringify({
                 phone: state,
@@ -197,7 +202,7 @@ function Forget({ setPage }) {
 
                     <div className={bot ? 'login__box' : "close"}>
                         <h2 className='login__title login__title--size'>
-                            Telefon raqamingiz yoki Location UZ bo'lmagani uchun <a className='login__span' href="httpss://t.me/behad_support_bot">Telegram botga</a> kiring!
+                            Telefon raqamingiz yoki Location UZ bo'lmagani uchun <a className='login__span' href="https://t.me/behad_support_bot">Telegram botga</a> kiring!
                         </h2>
                     </div>
                 </div>

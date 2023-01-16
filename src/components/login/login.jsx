@@ -31,6 +31,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
 
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Access-Control-Allow-Origin', 'https://behad.uz');
 
         const raw = JSON.stringify({
             phone: `+${state}`,
