@@ -29,25 +29,20 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
         e.preventDefault();
         const { password } = e.target.elements
 
-        const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Access-Control-Allow-Origin', 'https://behad.uz');
-
-        const raw = JSON.stringify({
-            phone: `+${state}`,
-            password: password.value.trim().toLowerCase(),
-        });
-
-        const requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow',
-        };
-
-        fetch('https://users.behad.uz/api/v1/login/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
+        fetch('https://users.behad.uz/api/v1/login/' + temptoken + "/" + app_key + "/" + notification_token, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin':'*'
+            },
+            body: JSON.stringify({
+                phone: `+${state}`,
+                password: password.value
+            })
+        })
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 if (data.status === 401) {
                     setErr(true)
                 } else if (data.status === 200) {
