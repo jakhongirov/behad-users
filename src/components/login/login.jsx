@@ -32,8 +32,9 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
         fetch('https://users.behad.uz/api/v1/login/' + temptoken + "/" + app_key + "/" + notification_token, {
             method: "POST",
             headers: {
+                "Accep" : "application/json",
                 "Content-Type": "application/json",
-                'Access-Control-Allow-Origin':'*'
+                "Access-Control-Allow-Origin": "*"
             },
             body: JSON.stringify({
                 phone: `+${state}`,

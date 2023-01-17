@@ -31,7 +31,8 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
         if (password.value.trim() === password_again.value.trim()) {
             const myHeaders = new Headers();
             myHeaders.append('Content-Type', 'application/json');
-            myHeaders.append('Access-Control-Allow-Origin', 'https://behad.uz');
+            myHeaders.append('Access-Control-Allow-Origin', '*');
+            myHeaders.append('Accep', 'application/json');
 
 
             const raw = JSON.stringify({
