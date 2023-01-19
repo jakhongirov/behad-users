@@ -16,9 +16,7 @@ html {
 }
 
 body {
-    background-image: url("https://picsum.photos/780/600");
-    background-size: cover;
-    background-repeat: no-repeat;
+background: #0087e0;
 }
 
 #root {

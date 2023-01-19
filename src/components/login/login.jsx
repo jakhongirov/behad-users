@@ -35,6 +35,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
                 "Accep" : "application/json",
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*"
+                
             },
             body: JSON.stringify({
                 phone: `+${state}`,
