@@ -71,6 +71,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
                                     <PhoneInput
                                         country={location?.country_code.toLowerCase()}
                                         value={state?.phone}
+                                        required={true}
                                         onChange={(phone) => { setState(phone); setErr1(false) }}
                                     />
                                     <span className={err1 ? 'forget__error__span' : 'close'}>{err1 ? "Telefon raqami ro'yhatdan o'tmagan" : ""}</span>

@@ -96,14 +96,14 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
 
                                 <div className='register__input__box'>
                                     <div className='login__input__box login__input__box--width'>
-                                        <input className='login__phone__input' id='age' type="number" name='age' placeholder='' min={1} max={99} />
+                                        <input className='login__phone__input' id='age' type="number" name='age' placeholder='' required min={1} max={99} />
                                         <label className="login__phone_label" htmlFor="age">
                                             Yosh
                                         </label>
                                     </div>
                                     <div className='login__input__box login__input__box--select'>
-                                        <select className='login__phone__input login__phone__input--select' name="who">
-                                            <option value="all">Jinsi</option>
+                                        <select className='login__phone__input login__phone__input--select' name="who" required> 
+                                            <option value="all" disabled>Jinsi</option>
                                             <option value="erkak">Erkak</option>
                                             <option value="ayol">Ayol</option>
                                         </select>
@@ -115,6 +115,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                                         country={location?.country_code.toLowerCase()}
                                         value={state?.phone}
                                         onChange={phone => setState(phone)}
+                                        required={true}
                                     />
                                     <span className={err2 ? 'forget__error__span' : 'close'}>{err2 ? "Telefon raqami ro'yhatdan o'tgan" : ""}</span>
                                 </div>
