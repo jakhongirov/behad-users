@@ -23,7 +23,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
         fetch(`https://ipinfo.io/${location?.ip}?token=0166032ebc35f8`)
             .then(res => res.json())
             .then(data => setGeolocation(data))
-            .catch(e => console.log(e))
+            .catch(e => console.log(e)) 
     }, [location])
 
     const closeTab = () => {
