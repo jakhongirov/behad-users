@@ -18,11 +18,21 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
             .catch(e => console.log(e))
     }, [])
 
+    useEffect(() => {
+        fetch(`https://ipinfo.io/${location?.ip}?token=0166032ebc35f8`)
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+    }, [location])
+
     const closeTab = () => {
         window.opener = null;
         window.open('', '_self');
         window.close();
     };
+
+
+    console.log(location?.country);
 
     const HandleSubmit = (e) => {
         e.preventDefault();
@@ -102,7 +112,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                                         </label>
                                     </div>
                                     <div className='login__input__box login__input__box--select'>
-                                        <select className='login__phone__input login__phone__input--select' name="who" required> 
+                                        <select className='login__phone__input login__phone__input--select' name="who" required>
                                             <option value="all" disabled>Jinsi</option>
                                             <option value="erkak">Erkak</option>
                                             <option value="ayol">Ayol</option>
