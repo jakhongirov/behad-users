@@ -43,7 +43,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                 phone: `+${state}`,
                 password: password.value.trim().toLowerCase(),
                 country: location?.country,
-                capital: location?.country_capital,
+                capital: location?.region,
             });
 
             const requestOptions = {
