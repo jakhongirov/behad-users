@@ -8,6 +8,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
     const [err, setErr] = useState(false)
     const [err2, setErr2] = useState(false)
     const [location, setLocation] = useState()
+    const [geolocation, setGeolocation] = useState()
     const [state, setState] = useState()
     const [modal, setModal] = useState(false)
 
@@ -21,7 +22,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
     useEffect(() => {
         fetch(`https://ipinfo.io/${location?.ip}?token=0166032ebc35f8`)
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => setGeolocation(data))
             .catch(e => console.log(e))
     }, [location])
 
@@ -30,9 +31,6 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
         window.open('', '_self');
         window.close();
     };
-
-
-    console.log(location?.country);
 
     const HandleSubmit = (e) => {
         e.preventDefault();
@@ -52,8 +50,8 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                 who: who.value.trim(),
                 phone: `+${state}`,
                 password: password.value.trim().toLowerCase(),
-                country: location?.country,
-                capital: location?.region,
+                country: geolocation?.country,
+                capital: geolocation?.region,
             });
 
             const requestOptions = {
