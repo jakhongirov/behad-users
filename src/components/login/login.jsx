@@ -94,7 +94,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => setPage(false)}>Ro'yxatdan o'tish</span></p>
+                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => setPage(true)}>Ro'yxatdan o'tish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>

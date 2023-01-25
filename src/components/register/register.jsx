@@ -144,7 +144,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz bormi ? <span className='login__span' onClick={() => setPage(true)}>Kirish</span></p>
+                        <p className='login__text'>Akkountingiz bormi ? <span className='login__span' onClick={() => setPage(false)}>Kirish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>

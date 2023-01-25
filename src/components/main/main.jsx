@@ -9,7 +9,8 @@ function Main({ page, setPage }) {
     return (
         <>
             {
-                page ? (<Login temptoken={temptoken} app_key={key} notification_token={notification_token} setPage={setPage} />)
+                
+                !page ? (<Login temptoken={temptoken} app_key={key} notification_token={notification_token} setPage={setPage} />)
                     : (<Register temptoken={temptoken} app_key={key} notification_token={notification_token} setPage={setPage} />)
             }
         </>
