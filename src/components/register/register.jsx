@@ -11,6 +11,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
     const [geolocation, setGeolocation] = useState()
     const [state, setState] = useState()
     const [modal, setModal] = useState(false)
+    const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
         fetch('https://ipapi.co/json')
@@ -23,7 +24,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
         fetch(`https://ipinfo.io/${location?.ip}?token=0166032ebc35f8`)
             .then(res => res.json())
             .then(data => setGeolocation(data))
-            .catch(e => console.log(e)) 
+            .catch(e => console.log(e))
     }, [location])
 
     const closeTab = () => {
@@ -36,47 +37,51 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
         e.preventDefault();
         const { name, surname, age, who, password, password_again } = e.target.elements
 
-        if (password.value.trim() === password_again.value.trim()) {
-            const myHeaders = new Headers();
-            myHeaders.append('Content-Type', 'application/json');
-            myHeaders.append('Access-Control-Allow-Origin', '*');
-            myHeaders.append('Accep', 'application/json');
+        if (name && surname && age && who && password && password_again) {
+            setDisabled(true)
+
+            if (password.value.trim() === password_again.value.trim()) {
+                const myHeaders = new Headers();
+                myHeaders.append('Content-Type', 'application/json');
+                myHeaders.append('Access-Control-Allow-Origin', '*');
+                myHeaders.append('Accep', 'application/json');
 
 
-            const raw = JSON.stringify({
-                name: name.value.trim(),
-                surname: surname.value.trim(),
-                age: age.value.trim() ? age.value.trim() : 0,
-                who: who.value.trim(),
-                phone: `+${state}`,
-                password: password.value.trim().toLowerCase(),
-                country: geolocation?.country,
-                capital: geolocation?.region,
-            });
+                const raw = JSON.stringify({
+                    name: name.value.trim(),
+                    surname: surname.value.trim(),
+                    age: age.value.trim() ? age.value.trim() : 0,
+                    who: who.value.trim(),
+                    phone: `+${state}`,
+                    password: password.value.trim().toLowerCase(),
+                    country: geolocation?.country,
+                    capital: geolocation?.region,
+                });
 
-            const requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow',
-            };
+                const requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow',
+                };
 
-            fetch('https://users.behad.uz/api/v1/register/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data);
-                    if (data.status === 401) {
-                        setErr(true)
-                    } else if (data.status === 302) {
-                        setErr2(true)
-                    } else if (data.status === 200) {
-                        setModal(true)
-                        closeTab();
-                    }
-                })
-                .catch((error) => console.log('error', error))
-        } else {
-            setErr(true)
+                fetch('https://users.behad.uz/api/v1/register/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data.status === 401) {
+                            setErr(true)
+                        } else if (data.status === 302) {
+                            setErr2(true)
+                        } else if (data.status === 200) {
+                            setModal(true)
+                            closeTab();
+                        }
+                    })
+                    .catch((error) => console.log('error', error))
+            } else {
+                setErr(true)
+            }
         }
     }
 
@@ -140,7 +145,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                                     </label>
                                 </div>
 
-                                <button className='login__btn'>Ro'yxatdan o'tish</button>
+                                <button className='login__btn' disabled={disabled}>Ro'yxatdan o'tish</button>
                             </form>
                         </div>
 

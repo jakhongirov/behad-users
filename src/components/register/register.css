@@ -84,3 +84,8 @@
 .form-control:hover{
     border: 2px solid #000;
 }
+
+.login__btn:disabled{
+    background: #000;
+    opacity: 0.5;
+}
