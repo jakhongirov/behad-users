@@ -35,53 +35,49 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
 
     const HandleSubmit = (e) => {
         e.preventDefault();
-        const { name, surname, age, who, password, password_again } = e.target.elements
+        const { name, surname, age, who, password } = e.target.elements
 
-        if (name && surname && age && who && password && password_again) {
+        if (name && surname && age && who && password) {
             setDisabled(true)
 
-            if (password.value.trim() === password_again.value.trim()) {
-                const myHeaders = new Headers();
-                myHeaders.append('Content-Type', 'application/json');
-                myHeaders.append('Access-Control-Allow-Origin', '*');
-                myHeaders.append('Accep', 'application/json');
+            const myHeaders = new Headers();
+            myHeaders.append('Content-Type', 'application/json');
+            myHeaders.append('Access-Control-Allow-Origin', '*');
+            myHeaders.append('Accep', 'application/json');
 
 
-                const raw = JSON.stringify({
-                    name: name.value.trim(),
-                    surname: surname.value.trim(),
-                    age: age.value.trim() ? age.value.trim() : 0,
-                    who: who.value.trim(),
-                    phone: `+${state}`,
-                    password: password.value.trim().toLowerCase(),
-                    country: geolocation?.country,
-                    capital: geolocation?.region,
-                });
+            const raw = JSON.stringify({
+                name: name.value.trim(),
+                surname: surname.value.trim(),
+                age: age.value.trim() ? age.value.trim() : 0,
+                who: who.value.trim(),
+                phone: `+${state}`,
+                password: password.value.trim().toLowerCase(),
+                country: geolocation?.country,
+                capital: geolocation?.region,
+            });
 
-                const requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: raw,
-                    redirect: 'follow',
-                };
+            const requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow',
+            };
 
-                fetch('https://users.behad.uz/api/v1/register/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data);
-                        if (data.status === 401) {
-                            setErr(true)
-                        } else if (data.status === 302) {
-                            setErr2(true)
-                        } else if (data.status === 200) {
-                            setModal(true)
-                            closeTab();
-                        }
-                    })
-                    .catch((error) => console.log('error', error))
-            } else {
-                setErr(true)
-            }
+            fetch('https://users.behad.uz/api/v1/register/' + temptoken + "/" + app_key + "/" + notification_token, requestOptions)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.status === 401) {
+                        setErr(true)
+                    } else if (data.status === 302) {
+                        setErr2(true)
+                    } else if (data.status === 200) {
+                        setModal(true)
+                        closeTab();
+                    }
+                })
+                .catch((error) => console.log('error', error))
         }
     }
 
@@ -91,7 +87,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                 <div className='container'>
                     <div className={!modal ? 'login__box' : "close"}>
                         <h1 className='login__title'>Ro'yxatdan o'tish</h1>
-                        <p className='login__text'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p className='login__text'>Behad tizimida profil yarating:</p>
                         <div className='login__form__box'>
                             <form autoComplete='off' onSubmit={HandleSubmit}>
                                 <div className='login__input__box'>
@@ -135,13 +131,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                                 <div className='login__input__box'>
                                     <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' required autoCapitalize='off' minLength={6} />
                                     <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password">
-                                        Parol *
-                                    </label>
-                                </div>
-                                <div className='login__input__box'>
-                                    <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password_again' type="password" name='password_again' autoCapitalize='off' required minLength={6} />
-                                    <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password_again">
-                                        Parol qayta yozing *
+                                        Parol yarating *
                                     </label>
                                 </div>
 
