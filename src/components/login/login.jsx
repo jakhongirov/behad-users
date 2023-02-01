@@ -64,7 +64,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
                 <div className='container'>
                     <div className={!modal ? 'login__box' : "close"}>
                         <h1 className='login__title'>Kirish</h1>
-                        <p className='login__text'>Behad tizimida profil yarating:</p>
+                        <p className='login__text'>Behad tizimida profilingizga kiring:</p>
                         <div className='login__form__box'>
                             <form className='login__form' autoComplete='off' autoCapitalize='off' onSubmit={HandleSubmit}>
                                 <div className='login__input__box'>
