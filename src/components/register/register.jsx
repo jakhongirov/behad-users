@@ -91,13 +91,13 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
                         <div className='login__form__box'>
                             <form autoComplete='off' onSubmit={HandleSubmit}>
                                 <div className='login__input__box'>
-                                    <input className='login__phone__input' id='name' type="text" name='name' required />
+                                    <input className='login__phone__input' id='name' type="text" name='name' required minLength={3} />
                                     <label className="login__phone_label" htmlFor="name">
                                         Ism *
                                     </label>
                                 </div>
                                 <div className='login__input__box'>
-                                    <input className='login__phone__input' id='surname' type="text" name='surname' required />
+                                    <input className='login__phone__input' id='surname' type="text" name='surname' required minLength={3} />
                                     <label className="login__phone_label" htmlFor="surname">
                                         Familiya *
                                     </label>
@@ -105,7 +105,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
 
                                 <div className='register__input__box'>
                                     <div className='login__input__box login__input__box--width'>
-                                        <input className='login__phone__input' id='age' type="number" name='age' placeholder='' required min={1} max={99} />
+                                        <input className='login__phone__input' id='age' type="number" name='age' placeholder='' required min={7} max={90} />
                                         <label className="login__phone_label" htmlFor="age">
                                             Yosh
                                         </label>
