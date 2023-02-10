@@ -20,14 +20,14 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
             .catch(e => console.log(e))
     }, [])
 
-    useEffect(() => {
-        if (location) {
-            fetch(`https://ipinfo.io/${location?.ip}?token=0166032ebc35f8`)
-                .then(res => res.json())
-                .then(data => { setGeolocation(data); console.log(data) })
-                .catch(e => console.log(e))
-        }
-    }, [location])
+    // useEffect(() => {
+    //     if (location) {
+    //         fetch(`https://ipinfo.io/${location?.ip}?token=0166032ebc35f8`)
+    //             .then(res => res.json())
+    //             .then(data => { setGeolocation(data); console.log(data) })
+    //             .catch(e => console.log(e))
+    //     }
+    // }, [location])
 
     const closeTab = () => {
         window.opener = null;
@@ -123,7 +123,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
 
                                 <div className='login__input__box'>
                                     <PhoneInput
-                                        country={location ? location?.country_code.toLowerCase() : "uz"}
+                                        country={"uz"}
                                         value={state?.phone}
                                         onChange={phone => setState(phone)}
                                         required={true}

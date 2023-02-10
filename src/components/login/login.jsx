@@ -69,7 +69,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
                             <form className='login__form' autoComplete='off' autoCapitalize='off' onSubmit={HandleSubmit}>
                                 <div className='login__input__box'>
                                     <PhoneInput
-                                        country={location ? location?.country_code.toLowerCase() : "uz"}
+                                        country={"uz"}
                                         value={state?.phone}
                                         required={true}
                                         onChange={(phone) => { setState(phone); setErr1(false) }}
