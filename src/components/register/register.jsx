@@ -4,30 +4,12 @@ import PhoneInput from 'react-phone-input-2'
 
 import Check from "../../assets/image/check_circle.svg"
 
-function Register({ temptoken, app_key, notification_token, setPage }) {
+function Register({ code, geolocation, temptoken, app_key, notification_token, setPage }) {
     const [err, setErr] = useState(false)
     const [err2, setErr2] = useState(false)
-    const [location, setLocation] = useState()
-    const [geolocation, setGeolocation] = useState()
     const [state, setState] = useState()
     const [modal, setModal] = useState(false)
     const [disabled, setDisabled] = useState(false)
-
-    useEffect(() => {
-        fetch('https://ipapi.co/json')
-            .then(res => res.json())
-            .then(data => setLocation(data))
-            .catch(e => console.log(e))
-    }, [])
-
-    // useEffect(() => {
-    //     if (location) {
-    //         fetch(`https://ipinfo.io/${location?.ip}?token=0166032ebc35f8`)
-    //             .then(res => res.json())
-    //             .then(data => { setGeolocation(data); console.log(data) })
-    //             .catch(e => console.log(e))
-    //     }
-    // }, [location])
 
     const closeTab = () => {
         window.opener = null;
@@ -123,7 +105,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
 
                                 <div className='login__input__box'>
                                     <PhoneInput
-                                        country={"uz"}
+                                        country={code}
                                         value={state?.phone}
                                         onChange={phone => setState(phone)}
                                         required={true}

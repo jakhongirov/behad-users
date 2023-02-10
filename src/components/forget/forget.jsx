@@ -164,7 +164,7 @@ function Forget({ setPage }) {
                             <form className='login__form' autoComplete='off' autoCapitalize='off' onSubmit={phone ? HandleSubmitMessage : sms ? HandleSubmitPassword : HandleSubmit}>
                                 <div className='login__input__box'>
                                     <PhoneInput
-                                        country={location?.country_code.toLowerCase()}
+                                        country={location ? location?.country_code.toLowerCase() : "uz"}
                                         value={state?.phone}
                                         onChange={phone => setState(phone)}
                                     />

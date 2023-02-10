@@ -5,19 +5,11 @@ import PhoneInput from 'react-phone-input-2'
 
 import Check from "../../assets/image/check_circle.svg"
 
-function Login({ temptoken, app_key, notification_token, setPage }) {
+function Login({ code, temptoken, app_key, notification_token, setPage }) {
     const [err, setErr] = useState(false)
     const [err1, setErr1] = useState(false)
-    const [location, setLocation] = useState()
     const [state, setState] = useState()
     const [modal, setModal] = useState(false)
-
-    useEffect(() => {
-        fetch('https://ipapi.co/json')
-            .then(res => res.json())
-            .then(data => setLocation(data))
-            .catch(e => console.log(e))
-    }, [])
 
     const closeTab = () => {
         window.opener = null;
@@ -69,7 +61,7 @@ function Login({ temptoken, app_key, notification_token, setPage }) {
                             <form className='login__form' autoComplete='off' autoCapitalize='off' onSubmit={HandleSubmit}>
                                 <div className='login__input__box'>
                                     <PhoneInput
-                                        country={"uz"}
+                                        country={code}
                                         value={state?.phone}
                                         required={true}
                                         onChange={(phone) => { setState(phone); setErr1(false) }}
