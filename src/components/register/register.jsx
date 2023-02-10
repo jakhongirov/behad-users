@@ -23,7 +23,7 @@ function Register({ temptoken, app_key, notification_token, setPage }) {
     useEffect(() => {
         fetch(`https://ipinfo.io/${location?.ip}?token=0166032ebc35f8`)
             .then(res => res.json())
-            .then(data => setGeolocation(data))
+            .then(data => {setGeolocation(data); console.log(data)})
             .catch(e => console.log(e))
     }, [location])
 

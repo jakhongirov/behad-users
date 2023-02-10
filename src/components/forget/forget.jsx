@@ -148,7 +148,7 @@ function Forget({ setPage }) {
 
             fetch('https://users.behad.uz/api/v1/forgetPassword/password', requestOptions)
                 .then((response) => response.json())
-                .then((data) => data.status === 401 ? setErr(true) : setErr(false), setModal(true), console.log(200))
+                .then((data) => data.status === 401 ? setErr(true) : setErr(false), setModal(true))
                 .catch((error) => console.log('error', error))
         }
     }
@@ -195,12 +195,12 @@ function Forget({ setPage }) {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => { navigate(-1); setPage(false) }}>Ro'yxatdan o'tish</span></p>
+                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => { navigate(-1); setPage(true) }}>Ro'yxatdan o'tish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>
                         <img className='image_check' src={Check} alt="check icon" />
-                        <h2 className='login__title login__title--size'>Parol muafaqiyatli tiklandi, <span className='login__span' onClick={() => { navigate(-1); setPage(true) }}>Kirish</span>ga qaytishingiz mumkin!</h2>
+                        <h2 className='login__title login__title--size'>Parol muafaqiyatli tiklandi, <span className='login__span' onClick={() => { navigate(-1); setPage(false) }}>Kirish</span>ga qaytishingiz mumkin!</h2>
                     </div>
 
                     <div className={bot ? 'login__box' : "close"}>
