@@ -89,3 +89,8 @@
     background: #000;
     opacity: 0.5;
 }
+
+.forget__error__span--margin{
+    display: block;
+    margin-bottom: 10px !important;
+}

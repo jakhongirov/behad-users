@@ -7,7 +7,7 @@ import Register from '../register/register'
 function Main({ page, setPage }) {
     const { temptoken, key, notification_token } = useParams()
     const [location, setLocation] = useState()
-    const [geolocation, setGeolocation] = useState()
+    const [ip, setIp] = useState()
     const [code, setCode] = useState('uz')
 
     useEffect(() => {
@@ -17,6 +17,7 @@ function Main({ page, setPage }) {
                 if (data) {
                     setLocation(data)
                     setCode(data?.country_code.toLowerCase())
+                    setIp(data?.ip)
                 }
             })
             .catch(e => console.log(e))
@@ -24,10 +25,6 @@ function Main({ page, setPage }) {
 
     useEffect(() => {
         if (location) {
-            fetch(`https://ipinfo.io/${location?.ip}?token=0166032ebc35f8`)
-                .then(res => res.json())
-                .then(data => { setGeolocation(data); console.log(data); })
-                .catch(e => console.log(e))
         }
     }, [location])
 
@@ -36,7 +33,7 @@ function Main({ page, setPage }) {
             {
 
                 !page ? (<Login code={code} temptoken={temptoken} app_key={key} notification_token={notification_token} setPage={setPage} />)
-                    : (<Register code={code} geolocation={geolocation} temptoken={temptoken} app_key={key} notification_token={notification_token} setPage={setPage} />)
+                    : (<Register code={code} ip={ip} temptoken={temptoken} app_key={key} notification_token={notification_token} setPage={setPage} />)
             }
         </>
     )
