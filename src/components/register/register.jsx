@@ -14,7 +14,7 @@ function Register({ code, ip, temptoken, app_key, notification_token, setPage })
     const [disabled, setDisabled] = useState(false)
 
     const getLocation = () => {
-        if(ip) {
+        if (ip) {
             console.log(ip);
             fetch(`https://ipinfo.io/${ip}?token=0166032ebc35f8`)
                 .then(res => res.json())
@@ -46,8 +46,8 @@ function Register({ code, ip, temptoken, app_key, notification_token, setPage })
                         who: who.value.trim(),
                         phone: `+${state}`,
                         password: password.value.trim().toLowerCase(),
-                        country: geolocation?.country,
-                        capital: geolocation?.region,
+                        country: geolocation?.country ? geolocation?.country : "Aniq emas",
+                        capital: geolocation?.region ? geolocation?.region : "Aniq emas",
                     }),
                     headers: {
                         'Content-Type': 'application/json',
