@@ -11,13 +11,13 @@ function Main({ page, setPage }) {
     const [code, setCode] = useState('uz')
 
     useEffect(() => {
-        fetch('https://ipapi.co/json')
+        fetch('https://geolocation-db.com/json/a9e48c70-8b22-11ed-8d13-bd165d1291e3')
             .then(res => res.json())
             .then(data => {
                 if (data) {
                     setLocation(data)
                     setCode(data?.country_code.toLowerCase())
-                    setIp(data?.ip)
+                    setIp(data?.IPv4)
                 }
             })
             .catch(e => console.log(e))

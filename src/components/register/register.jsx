@@ -1,5 +1,5 @@
 import './register.css'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PhoneInput from 'react-phone-input-2'
 
 import Check from "../../assets/image/check_circle.svg"
