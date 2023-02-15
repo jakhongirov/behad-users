@@ -159,7 +159,8 @@ function Forget({ setPage }) {
             <section className='login'>
                 <div className='container'>
                     <div className={!bot && !modal ? 'login__box' : "close"}>
-                        <h1 className='login__title'>Parolni tiklash!</h1>
+                        <h1 className='login__title'>Parolni tiklash</h1>
+                        <p className='login__text'>Tasdiqlash kodini kiriting va yangi parol yarating</p>
                         <div className='login__form__box'>
                             <form className='login__form' autoComplete='off' autoCapitalize='off' onSubmit={phone ? HandleSubmitMessage : sms ? HandleSubmitPassword : HandleSubmit}>
                                 <div className='login__input__box'>
