@@ -64,7 +64,7 @@ function Forget({ setPage }) {
             redirect: 'follow',
         };
 
-        if (location?.country_code === "UZ" && state.split('').slice(0, 3).join('') === '998') {
+        if (state.split('').slice(0, 3).join('') === '998') {
             fetch('https://users.behad.uz/api/v1/forgetPassword/phone', requestOptions)
                 .then((response) => response.json())
                 .then((data) => {
@@ -205,7 +205,7 @@ function Forget({ setPage }) {
 
                     <div className={bot ? 'login__box' : "close"}>
                         <h2 className='login__title login__title--size'>
-                            Telefon raqamingiz yoki Location UZ bo'lmagani uchun <a className='login__span' href="https://t.me/behad_support_bot">Telegram botga</a> kiring!
+                            Parolingizni tiklash uchun iltimos <a className='login__span' href="https://t.me/behad_support_bot">Telegram botga</a> murojat qiling!
                         </h2>
                     </div>
                 </div>

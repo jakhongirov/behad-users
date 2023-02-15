@@ -4,24 +4,13 @@ import PhoneInput from 'react-phone-input-2'
 
 import Check from "../../assets/image/check_circle.svg"
 
-function Register({ code, ip, temptoken, app_key, notification_token, setPage }) {
+function Register({ code, geolocation, setRefresh, refresh, temptoken, app_key, notification_token, setPage }) {
     const [err, setErr] = useState(false)
     const [err2, setErr2] = useState(false)
     const [err3, setErr3] = useState(false)
     const [state, setState] = useState()
     const [modal, setModal] = useState(false)
-    const [geolocation, setGeolocation] = useState()
     const [disabled, setDisabled] = useState(false)
-
-    const getLocation = () => {
-        if (ip) {
-            console.log(ip);
-            fetch(`https://ipinfo.io/${ip}?token=0166032ebc35f8`)
-                .then(res => res.json())
-                .then(data => { setGeolocation(data); console.log(data); })
-                .catch(e => console.log(e))
-        }
-    }
 
     const closeTab = () => {
         window.opener = null;
@@ -46,8 +35,8 @@ function Register({ code, ip, temptoken, app_key, notification_token, setPage })
                         who: who.value.trim(),
                         phone: `+${state}`,
                         password: password.value.trim().toLowerCase(),
-                        country: geolocation?.country ? geolocation?.country : "Aniq emas",
-                        capital: geolocation?.region ? geolocation?.region : "Aniq emas",
+                        country: geolocation?.country,
+                        capital: geolocation?.region
                     }),
                     headers: {
                         'Content-Type': 'application/json',
@@ -60,8 +49,10 @@ function Register({ code, ip, temptoken, app_key, notification_token, setPage })
                         console.log(data);
                         if (data.status === 401) {
                             setErr(true)
+                            setDisabled(false)
                         } else if (data.status === 302) {
                             setErr2(true)
+                            setDisabled(false)
                         } else if (data.status === 200) {
                             setModal(true)
                             closeTab();
@@ -71,6 +62,7 @@ function Register({ code, ip, temptoken, app_key, notification_token, setPage })
             } else {
                 setErr3(true)
                 setDisabled(false)
+                setRefresh(Number(refresh) + 1)
             }
         }
     }
@@ -123,7 +115,7 @@ function Register({ code, ip, temptoken, app_key, notification_token, setPage })
                                     <span className={err2 ? 'forget__error__span' : 'close'}>{err2 ? "Telefon raqami ro'yhatdan o'tgan" : ""}</span>
                                 </div>
                                 <div className='login__input__box'>
-                                    <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' required autoCapitalize='off' minLength={6} onFocus={getLocation} />
+                                    <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' required autoCapitalize='off' minLength={6} />
                                     <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password">
                                         Parol yarating *
                                     </label>
