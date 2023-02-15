@@ -160,7 +160,6 @@ function Forget({ setPage }) {
                 <div className='container'>
                     <div className={!bot && !modal ? 'login__box' : "close"}>
                         <h1 className='login__title'>Parolni tiklash!</h1>
-                        <p className='login__text'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                         <div className='login__form__box'>
                             <form className='login__form' autoComplete='off' autoCapitalize='off' onSubmit={phone ? HandleSubmitMessage : sms ? HandleSubmitPassword : HandleSubmit}>
                                 <div className='login__input__box'>
@@ -196,7 +195,7 @@ function Forget({ setPage }) {
                             </form>
                         </div>
 
-                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => { navigate(-1); setPage(true) }}>Ro'yxatdan o'tish</span></p>
+                        <p className='login__text'>Akkountingiz yo'qmi? <span className='login__span' onClick={() => { navigate(`/login/${temptoken}/${key}/${notification_token}`); setPage(true) }}>Ro'yxatdan o'tish</span></p>
                     </div>
 
                     <div className={modal ? 'login__box' : "close"}>
