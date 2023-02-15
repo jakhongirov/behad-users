@@ -1,11 +1,12 @@
 import "./forget.css"
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 
 import Check from "../../assets/image/check_circle.svg"
 
 function Forget({ setPage }) {
+    const { temptoken, key, notification_token } = useParams()
     const navigate = useNavigate()
     const [err, setErr] = useState(false)
     const [err1, setErr1] = useState(false)
@@ -200,7 +201,7 @@ function Forget({ setPage }) {
 
                     <div className={modal ? 'login__box' : "close"}>
                         <img className='image_check' src={Check} alt="check icon" />
-                        <h2 className='login__title login__title--size'>Parol muafaqiyatli tiklandi, <span className='login__span' onClick={() => { navigate(-1); setPage(false) }}>Kirish</span>ga qaytishingiz mumkin!</h2>
+                        <h2 className='login__title login__title--size'>Parol muafaqiyatli tiklandi, <span className='login__span' onClick={() => { navigate(`/login/${temptoken}/${key}/${notification_token}`); setPage(false) }}>Kirish</span>ga qaytishingiz mumkin!</h2>
                     </div>
 
                     <div className={bot ? 'login__box' : "close"}>
