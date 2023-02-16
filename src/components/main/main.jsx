@@ -29,7 +29,10 @@ function Main({ page, setPage }) {
                     setIp(data?.IPv4)
                 }
             })
-            .catch(e => console.log(e))
+            .catch(e => {
+                console.log(e)
+                setRefresh(Number(refresh) + 1)
+            })
     }, [refresh])
 
     useEffect(() => {
@@ -47,7 +50,7 @@ function Main({ page, setPage }) {
                     .catch(e => console.log(e))
             }
         }
-    }, [ip])
+    }, [ip, char])
 
     return (
         <>

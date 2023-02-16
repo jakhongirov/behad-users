@@ -1,6 +1,6 @@
 import './login.css'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import PhoneInput from 'react-phone-input-2'
 
 import Check from "../../assets/image/check_circle.svg"
@@ -10,6 +10,7 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
     const [err1, setErr1] = useState(false)
     const [state, setState] = useState()
     const [modal, setModal] = useState(false)
+    const [disabled, setDisabled] = useState(false)
 
     const closeTab = () => {
         window.opener = null;
@@ -20,14 +21,15 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
     const HandleSubmit = (e) => {
         e.preventDefault();
         const { password } = e.target.elements
+        setDisabled(true)
 
         fetch('https://users.behad.uz/api/v1/login/' + temptoken + "/" + app_key + "/" + notification_token, {
             method: "POST",
             headers: {
-                "Accep" : "application/json",
+                "Accep": "application/json",
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*"
-                
+
             },
             body: JSON.stringify({
                 phone: `+${state}`,
@@ -39,10 +41,12 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
                 console.log(data);
                 if (data.status === 401) {
                     setErr(true)
+                    setDisabled(false)
                 } else if (data.status === 200) {
                     setModal(true)
                     closeTab();
                 } else if (data.status === 404) {
+                    setDisabled(false)
                     setErr1(true)
                 }
             })
@@ -82,7 +86,7 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
                                     Parolni unutdingizmi?
                                 </Link>
 
-                                <button className='login__btn'>KIrish</button>
+                                <button className='login__btn' disabled={disabled}>KIrish</button>
                             </form>
                         </div>
 
