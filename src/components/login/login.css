@@ -128,7 +128,7 @@
     color: #ffffff;
 }
 
-.login__btn:hover{
+.login__btn:focus{
     border: 3px solid #0496ff;
     color: #0496ff;
     background: #ffffff;
