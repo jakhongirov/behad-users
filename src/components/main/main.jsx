@@ -37,19 +37,26 @@ function Main({ page, setPage }) {
 
     useEffect(() => {
         if (ip) {
-            makeCode(1)
-            if (char === '0') {
-                fetch(`https://ipinfo.io/${ip}?token=0166032ebc35f8`)
-                    .then(res => res.json())
-                    .then(data => { setGeolocation(data); })
-                    .catch(e => console.log(e))
-            } else if (char === '1') {
+            // makeCode(1)
+            // if (char === '0') {
+            //     fetch(`https://ipinfo.io/${ip}?token=0166032ebc35f8`)
+            //         .then(res => res.json())
+            //         .then(data => { setGeolocation(data); })
+            //         .catch(e => console.log(e))
+            // } else if (char === '1') {
+            //     fetch(`https://ipinfo.io/${ip}?token=2c78dced689a96`)
+            //         .then(res => res.json())
+            //         .then(data => { setGeolocation(data); })
+            //         .catch(e => console.log(e))
+            // }
+
                 fetch(`https://ipinfo.io/${ip}?token=2c78dced689a96`)
                     .then(res => res.json())
                     .then(data => { setGeolocation(data); })
                     .catch(e => console.log(e))
-            }
         }
+
+
     }, [ip, char])
 
     return (
