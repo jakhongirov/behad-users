@@ -7,57 +7,58 @@ import Register from '../register/register'
 function Main({ page, setPage }) {
     const { temptoken, key, notification_token } = useParams()
     const [geolocation, setGeolocation] = useState()
-    const [ip, setIp] = useState()
+    const [ip, setIp] = useState('')
     const [code, setCode] = useState('uz')
-    // const [char, setChar] = useState('0')
+    const [char, setChar] = useState()
     const [refresh, setRefresh] = useState(0)
 
-    // const makeCode = (length) => {
-    //     let characters = '01';
-    //     let charactersLength = characters.length;
-    //     for (let i = 0; i < length; i++) {
-    //         setChar(characters.charAt(Math.floor(Math.random() * charactersLength)));
-    //     }
-    // }
+    const makeCode = (length) => {
+        let characters = '123';
+        let charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+           return setChar(characters.charAt(Math.floor(Math.random() * charactersLength)));
+        }
+    }
 
     useEffect(() => {
-        fetch('https://geolocation-db.com/json/a9e48c70-8b22-11ed-8d13-bd165d1291e3')
+        makeCode(1)
+        fetch('https://ipapi.co/json')
             .then(res => res.json())
             .then(data => {
                 if (data) {
                     setCode(data?.country_code.toLowerCase())
-                    setIp(data?.IPv4)
+                    setIp(data?.ip)
                 }
             })
-            .catch(e => {   
+            .catch(e => {
                 console.log(e)
                 setRefresh(Number(refresh) + 1)
             })
     }, [refresh])
 
     useEffect(() => {
-        if (ip) {
-            // makeCode(1)
-            // if (char === '0') {
-            //     fetch(`https://ipinfo.io/${ip}?token=0166032ebc35f8`)
-            //         .then(res => res.json())
-            //         .then(data => { setGeolocation(data); })
-            //         .catch(e => console.log(e))
-            // } else if (char === '1') {
-            //     fetch(`https://ipinfo.io/${ip}?token=2c78dced689a96`)
-            //         .then(res => res.json())
-            //         .then(data => { setGeolocation(data); })
-            //         .catch(e => console.log(e))
-            // }
-
+        if (ip.split('').length > 0) {
+            console.log(char);
+            if (char === '1') {
+                fetch(`https://ipinfo.io/${ip}?token=2cb6b60ad001d9`)
+                    .then(res => res.json())
+                    .then(data => { setGeolocation(data); })
+                    .catch(e => console.log(e))
+            } else if (char === '2') {
                 fetch(`https://ipinfo.io/${ip}?token=2c78dced689a96`)
                     .then(res => res.json())
                     .then(data => { setGeolocation(data); })
                     .catch(e => console.log(e))
+            } else if (char === '3') {
+                fetch(`https://ipinfo.io/${ip}?token=3078b8054d8815`)
+                    .then(res => res.json())
+                    .then(data => { setGeolocation(data); })
+                    .catch(e => console.log(e))
+            }
         }
 
 
-    }, [ip])
+    }, [ip, char])
 
     return (
         <>
