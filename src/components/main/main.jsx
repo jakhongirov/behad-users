@@ -9,16 +9,16 @@ function Main({ page, setPage }) {
     const [geolocation, setGeolocation] = useState()
     const [ip, setIp] = useState()
     const [code, setCode] = useState('uz')
-    const [char, setChar] = useState('0')
+    // const [char, setChar] = useState('0')
     const [refresh, setRefresh] = useState(0)
 
-    const makeCode = (length) => {
-        let characters = '01';
-        let charactersLength = characters.length;
-        for (let i = 0; i < length; i++) {
-            setChar(characters.charAt(Math.floor(Math.random() * charactersLength)));
-        }
-    }
+    // const makeCode = (length) => {
+    //     let characters = '01';
+    //     let charactersLength = characters.length;
+    //     for (let i = 0; i < length; i++) {
+    //         setChar(characters.charAt(Math.floor(Math.random() * charactersLength)));
+    //     }
+    // }
 
     useEffect(() => {
         fetch('https://geolocation-db.com/json/a9e48c70-8b22-11ed-8d13-bd165d1291e3')
@@ -29,7 +29,7 @@ function Main({ page, setPage }) {
                     setIp(data?.IPv4)
                 }
             })
-            .catch(e => {
+            .catch(e => {   
                 console.log(e)
                 setRefresh(Number(refresh) + 1)
             })
@@ -57,7 +57,7 @@ function Main({ page, setPage }) {
         }
 
 
-    }, [ip, char])
+    }, [ip])
 
     return (
         <>
