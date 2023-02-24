@@ -22,12 +22,12 @@ function Main({ page, setPage }) {
 
     useEffect(() => {
         makeCode(1)
-        fetch('https://ipapi.co/json')
+        fetch('https://geolocation-db.com/json/')
             .then(res => res.json())
             .then(data => {
                 if (data) {
                     setCode(data?.country_code.toLowerCase())
-                    setIp(data?.ip)
+                    setIp(data?.IPv4)
                 }
             })
             .catch(e => {
@@ -56,8 +56,6 @@ function Main({ page, setPage }) {
                     .catch(e => console.log(e))
             }
         }
-
-
     }, [ip, char])
 
     return (
