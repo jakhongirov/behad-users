@@ -1,22 +1,68 @@
 import './register.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-input-2'
+import axios from 'axios'
 
 import Check from "../../assets/image/check_circle.svg"
 
-function Register({ code, geolocation, setRefresh, refresh, temptoken, app_key, notification_token, setPage }) {
+function Register({ code, setCode, temptoken, app_key, notification_token, setPage }) {
     const [err, setErr] = useState(false)
     const [err2, setErr2] = useState(false)
     const [err3, setErr3] = useState(false)
     const [state, setState] = useState()
     const [modal, setModal] = useState(false)
     const [disabled, setDisabled] = useState(false)
+    const [geolocation, setGeolocation] = useState()
+    const [ip, setIp] = useState('')
+    const [char, setChar] = useState()
+    const [refresh, setRefresh] = useState(0)
+
+    const makeCode = (length) => {
+        let characters = '123';
+        let charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            return setChar(characters.charAt(Math.floor(Math.random() * charactersLength)));
+        }
+    }
+
+    const getData = async () => {
+        const res = await axios.get('https://geolocation-db.com/json/')
+        setIp(res.data.IPv4)
+        setCode(res.data?.country_code.toLowerCase())
+    }
+
+    useEffect(() => {
+        makeCode(1)
+        getData()
+    }, [refresh])
 
     const closeTab = () => {
         window.opener = null;
         window.open('', '_self');
         window.close();
     };
+
+    useEffect(() => {
+        if (ip.split('.').length > 0) {
+            console.log(ip.split('.').length > 0);
+            if (char === '1') {
+                fetch(`https://ipinfo.io/${ip}?token=2cb6b60ad001d9`)
+                    .then(res => res.json())
+                    .then(data => { setGeolocation(data); })
+                    .catch(e => console.log(e))
+            } else if (char === '2') {
+                fetch(`https://ipinfo.io/${ip}?token=2c78dced689a96`)
+                    .then(res => res.json())
+                    .then(data => { setGeolocation(data); })
+                    .catch(e => console.log(e))
+            } else if (char === '3') {
+                fetch(`https://ipinfo.io/${ip}?token=3078b8054d8815`)
+                    .then(res => res.json())
+                    .then(data => { setGeolocation(data); })
+                    .catch(e => console.log(e))
+            }
+        }
+    }, [ip, char])
 
     const HandleSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +71,7 @@ function Register({ code, geolocation, setRefresh, refresh, temptoken, app_key, 
         if (name && surname && age && who && password) {
             setDisabled(true)
 
-            if (geolocation) {
+            if (geolocation?.country) {
                 fetch('https://users.behad.uz/api/v1/register/' + temptoken + "/" + app_key + "/" + notification_token, {
                     method: 'POST',
                     body: JSON.stringify({
