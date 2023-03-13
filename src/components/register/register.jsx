@@ -46,17 +46,17 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
         if (ip.split('.').length > 0) {
             console.log(ip.split('.').length > 0);
             if (char === '1') {
-                fetch(`https://ipinfo.io/${ip}?token=2cb6b60ad001d9`)
+                fetch(`https://ipinfo.io/${ip}?token=be16c9da4fb7a9`)
                     .then(res => res.json())
                     .then(data => { setGeolocation(data); })
                     .catch(e => console.log(e))
             } else if (char === '2') {
-                fetch(`https://ipinfo.io/${ip}?token=2c78dced689a96`)
+                fetch(`https://ipinfo.io/${ip}?token=0166032ebc35f8`)
                     .then(res => res.json())
                     .then(data => { setGeolocation(data); })
                     .catch(e => console.log(e))
             } else if (char === '3') {
-                fetch(`https://ipinfo.io/${ip}?token=3078b8054d8815`)
+                fetch(`https://ipinfo.io/${ip}?token=011af3907d2f06`)
                     .then(res => res.json())
                     .then(data => { setGeolocation(data); })
                     .catch(e => console.log(e))
