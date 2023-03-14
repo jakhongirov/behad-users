@@ -18,6 +18,40 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
         window.close();
     };
 
+    const TrackPhone = () => {
+        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Accep': 'application/json'
+            },
+            body: JSON.stringify({
+                type: 'phone'
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+    }
+
+    const TrackSuccess = () => {
+        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Accep': 'application/json'
+            },
+            body: JSON.stringify({
+                type: 'success'
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+    }
+
     const HandleSubmit = (e) => {
         e.preventDefault();
         const { password } = e.target.elements
@@ -44,6 +78,7 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
                     setDisabled(false)
                 } else if (data.status === 200) {
                     setModal(true)
+                    TrackSuccess()
                     closeTab();
                 } else if (data.status === 404) {
                     setDisabled(false)
@@ -68,6 +103,7 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
                                         country={code}
                                         value={state?.phone}
                                         required={true}
+                                        onFocus={TrackPhone}
                                         onChange={(phone) => { setState(phone); setErr1(false) }}
                                     />
                                     <span className={err1 ? 'forget__error__span' : 'close'}>{err1 ? "Telefon raqami ro'yhatdan o'tmagan" : ""}</span>

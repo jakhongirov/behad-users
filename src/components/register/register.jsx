@@ -64,6 +64,40 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
         }
     }, [ip, char])
 
+    const TrackPhone = () => {
+        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Accep': 'application/json'
+            },
+            body: JSON.stringify({
+                type: 'phone'
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+    }
+
+    const TrackSuccess = () => {
+        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Accep': 'application/json'
+            },
+            body: JSON.stringify({
+                type: 'success'
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+    }
+
     const HandleSubmit = (e) => {
         e.preventDefault();
         const { name, surname, age, who, password } = e.target.elements
@@ -101,6 +135,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                             setDisabled(false)
                         } else if (data.status === 200) {
                             setModal(true)
+                            TrackSuccess()
                             closeTab();
                         }
                     })
@@ -156,6 +191,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                                         country={code}
                                         value={state?.phone}
                                         onChange={phone => setState(phone)}
+                                        onFocus={TrackPhone}
                                         required={true}
                                     />
                                     <span className={err2 ? 'forget__error__span' : 'close'}>{err2 ? "Telefon raqami ro'yhatdan o'tgan" : ""}</span>
