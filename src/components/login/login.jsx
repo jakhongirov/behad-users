@@ -35,23 +35,6 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
             .catch(e => console.log(e))
     }
 
-    const TrackSuccess = () => {
-        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Accep': 'application/json'
-            },
-            body: JSON.stringify({
-                type: 'success'
-            })
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(e => console.log(e))
-    }
-
     const HandleSubmit = (e) => {
         e.preventDefault();
         const { password } = e.target.elements
@@ -77,7 +60,6 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
                     setErr(true)
                     setDisabled(false)
                 } else if (data.status === 200) {
-                    TrackSuccess()
                     setModal(true)
                     closeTab();
                 } else if (data.status === 404) {

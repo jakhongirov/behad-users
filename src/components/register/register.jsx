@@ -81,7 +81,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
             .catch(e => console.log(e))
     }
 
-    const TrackSuccess = () => {
+    const TrackFail = () => {
         fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
             method: "PUT",
             headers: {
@@ -90,7 +90,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                 'Accep': 'application/json'
             },
             body: JSON.stringify({
-                type: 'success'
+                type: 'fail'
             })
         })
             .then(res => res.json())
@@ -134,7 +134,6 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                             setErr2(true)
                             setDisabled(false)
                         } else if (data.status === 200) {
-                            TrackSuccess()
                             setModal(true)
                             closeTab();
                         }
@@ -143,6 +142,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
             } else {
                 setErr3(true)
                 setDisabled(false)
+                TrackFail()
                 setRefresh(Number(refresh) + 1)
             }
         }
@@ -203,7 +203,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                                     </label>
                                 </div>
 
-                                <span className={err3 ? 'forget__error__span forget__error__span--margin' : 'close'}>{err3 ? "Iltimos, yana bir bor urining! " : ""}</span>
+                                <span className={err3 ? 'forget__error__span forget__error__span--margin' : 'close'}>{err3 ? "Iltimos, sahifani yangilab qayta urinib ko'ring!" : ""}</span>
 
                                 <button className='login__btn' disabled={disabled}>Ro'yxatdan o'tish</button>
                             </form>
