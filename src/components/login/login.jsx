@@ -77,8 +77,8 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
                     setErr(true)
                     setDisabled(false)
                 } else if (data.status === 200) {
-                    setModal(true)
                     TrackSuccess()
+                    setModal(true)
                     closeTab();
                 } else if (data.status === 404) {
                     setDisabled(false)

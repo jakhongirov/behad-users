@@ -8,22 +8,22 @@ function Main({ page, setPage }) {
     const { temptoken, key, notification_token } = useParams()
     const [code, setCode] = useState('uz')
 
-    useEffect(() => {
-        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Accep': 'application/json'
-            },
-            body: JSON.stringify({
-                type: 'entered'
+        useEffect(() => {
+            fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Accep': 'application/json'
+                },
+                body: JSON.stringify({
+                    type: 'entered'
+                })
             })
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(e => console.log(e))
-    }, [])
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(e => console.log(e))
+        }, [])
 
     return (
         <>

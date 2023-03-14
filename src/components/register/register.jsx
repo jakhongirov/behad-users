@@ -134,8 +134,8 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                             setErr2(true)
                             setDisabled(false)
                         } else if (data.status === 200) {
-                            setModal(true)
                             TrackSuccess()
+                            setModal(true)
                             closeTab();
                         }
                     })
