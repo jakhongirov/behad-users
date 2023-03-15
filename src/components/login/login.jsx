@@ -27,7 +27,44 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
                 'Accep': 'application/json'
             },
             body: JSON.stringify({
-                type: 'phone'
+                type: 'phone',
+                url: "login"
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+    }
+
+    const TrackPassword = () => {
+        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Accep': 'application/json'
+            },
+            body: JSON.stringify({
+                type: 'pass',
+                url: "login"
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+    }
+
+    const TrackFail = () => {
+        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Accep': 'application/json'
+            },
+            body: JSON.stringify({
+                type: 'fail',
+                url: "register"
             })
         })
             .then(res => res.json())
@@ -59,12 +96,14 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
                 if (data.status === 401) {
                     setErr(true)
                     setDisabled(false)
+                    TrackFail()
                 } else if (data.status === 200) {
                     setModal(true)
                     closeTab();
                 } else if (data.status === 404) {
                     setDisabled(false)
                     setErr1(true)
+                    TrackFail()
                 }
             })
             .catch((error) => console.log('error', error))
@@ -91,7 +130,7 @@ function Login({ code, temptoken, app_key, notification_token, setPage }) {
                                     <span className={err1 ? 'forget__error__span' : 'close'}>{err1 ? "Telefon raqami ro'yhatdan o'tmagan" : ""}</span>
                                 </div>
                                 <div className='login__input__box'>
-                                    <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' minLength={6} required />
+                                    <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' minLength={6} required onFocus={TrackPassword}/>
                                     <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password" >
                                         Parol
                                     </label>

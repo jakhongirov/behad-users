@@ -65,7 +65,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
     }, [ip, char])
 
     const TrackPhone = () => {
-        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
+        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin?", {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
@@ -73,7 +73,8 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                 'Accep': 'application/json'
             },
             body: JSON.stringify({
-                type: 'phone'
+                type: 'phone',
+                url: "register"
             })
         })
             .then(res => res.json())
@@ -90,7 +91,26 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                 'Accep': 'application/json'
             },
             body: JSON.stringify({
-                type: 'fail'
+                type: 'fail',
+                url: "register"
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+    }
+
+    const TrackPassword = () => {
+        fetch("https://users.behad.uz/api/v1/UpdateTrackLogin", {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Accep': 'application/json'
+            },
+            body: JSON.stringify({
+                type: 'pass',
+                url: "register"
             })
         })
             .then(res => res.json())
@@ -197,7 +217,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                                     <span className={err2 ? 'forget__error__span' : 'close'}>{err2 ? "Telefon raqami ro'yhatdan o'tgan" : ""}</span>
                                 </div>
                                 <div className='login__input__box'>
-                                    <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' required autoCapitalize='off' minLength={6} />
+                                    <input className={err ? 'login__phone__input login__phone__input--danger' : 'login__phone__input'} id='password' type="password" name='password' required autoCapitalize='off' minLength={6} onClick={TrackPassword} />
                                     <label className={err ? "login__phone_label login__phone_label--danger" : "login__phone_label"} htmlFor="password">
                                         Parol yarating *
                                     </label>
