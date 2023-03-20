@@ -26,7 +26,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
 
     const getLocations = () => {
         try {
-            fetch("http://api.db-ip.com/v2/free/self", {
+            fetch("https://api.db-ip.com/v2/free/self", {
                 method: "GET"
             })
                 .then((response) => response.json())
