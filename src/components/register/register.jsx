@@ -24,7 +24,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
     //     }
     // }
 
-    async function getLocations() {
+    const getLocations = () => {
         try {
             fetch("http://api.db-ip.com/v2/free/self", {
                 method: "GET"
@@ -37,10 +37,10 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
         }
     };
 
-    useEffect(() => {
-    //     makeCode(1)
-        getLocations()
-    }, [refresh])
+    // useEffect(() => {
+    //     //     makeCode(1)
+    //     getLocations()
+    // }, [refresh])
 
     const closeTab = () => {
         window.opener = null;
