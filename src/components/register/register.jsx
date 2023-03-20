@@ -1,7 +1,6 @@
 import './register.css'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PhoneInput from 'react-phone-input-2'
-import axios from 'axios'
 
 import Check from "../../assets/image/check_circle.svg"
 
@@ -25,16 +24,22 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
     //     }
     // }
 
-    const getData = async () => {
-        const res = await axios.get('http://api.db-ip.com/v2/free/self')
-        setGeolocation(res.data);
-        setCode(res.data?.countryCode.toLowerCase())
-    }
+    const url = "http://api.db-ip.com/v2/free/self"
+    async function getLocations() {
+        try {
+            return await fetch(url)
+                .then((response) => response.json())
+                .then((data) => setGeolocation(data))
 
-    useEffect(() => {
-        // makeCode(1)
-        getData()
-    }, [refresh])
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    // useEffect(() => {
+    //     makeCode(1)
+    //     getData()
+    // }, [refresh])
 
     const closeTab = () => {
         window.opener = null;
@@ -159,7 +164,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
         if (name && surname && age && who && password) {
             setDisabled(true)
 
-            if (geolocation?.country) {
+            if (geolocation?.countryCode) {
                 fetch('https://users.behad.uz/api/v1/register/' + temptoken + "/" + app_key + "/" + notification_token, {
                     method: 'POST',
                     body: JSON.stringify({
@@ -212,7 +217,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                         <div className='login__form__box'>
                             <form autoComplete='off' onSubmit={HandleSubmit}>
                                 <div className='login__input__box'>
-                                    <input className='login__phone__input' id='name' type="text" name='name' required minLength={3} />
+                                    <input className='login__phone__input' id='name' type="text" name='name' required minLength={3} onFocus={getLocations} />
                                     <label className="login__phone_label" htmlFor="name">
                                         Ism *
                                     </label>
