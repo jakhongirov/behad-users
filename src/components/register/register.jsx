@@ -13,26 +13,26 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
     const [modal, setModal] = useState(false)
     const [disabled, setDisabled] = useState(false)
     const [geolocation, setGeolocation] = useState()
-    const [ip, setIp] = useState('')
-    const [char, setChar] = useState()
+    // const [ip, setIp] = useState('')
+    // const [char, setChar] = useState()
     const [refresh, setRefresh] = useState(0)
 
-    const makeCode = (length) => {
-        let characters = '123';
-        let charactersLength = characters.length;
-        for (let i = 0; i < length; i++) {
-            return setChar(characters.charAt(Math.floor(Math.random() * charactersLength)));
-        }
-    }
+    // const makeCode = (length) => {
+    //     let characters = '123';
+    //     let charactersLength = characters.length;
+    //     for (let i = 0; i < length; i++) {
+    //         return setChar(characters.charAt(Math.floor(Math.random() * charactersLength)));
+    //     }
+    // }
 
     const getData = async () => {
-        const res = await axios.get('https://geolocation-db.com/json/')
-        setIp(res.data.IPv4)
-        setCode(res.data?.country_code.toLowerCase())
+        const res = await axios.get('http://api.db-ip.com/v2/free/self')
+        setGeolocation(res.data);
+        setCode(res.data?.countryCode.toLowerCase())
     }
 
     useEffect(() => {
-        makeCode(1)
+        // makeCode(1)
         getData()
     }, [refresh])
 
@@ -42,27 +42,61 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
         window.close();
     };
 
-    useEffect(() => {
-        if (ip.split('.').length > 0) {
-            console.log(ip.split('.').length > 0);
-            if (char === '1') {
-                fetch(`https://ipinfo.io/${ip}?token=be16c9da4fb7a9`)
-                    .then(res => res.json())
-                    .then(data => { setGeolocation(data); })
-                    .catch(e => console.log(e))
-            } else if (char === '2') {
-                fetch(`https://ipinfo.io/${ip}?token=0166032ebc35f8`)
-                    .then(res => res.json())
-                    .then(data => { setGeolocation(data); })
-                    .catch(e => console.log(e))
-            } else if (char === '3') {
-                fetch(`https://ipinfo.io/${ip}?token=011af3907d2f06`)
-                    .then(res => res.json())
-                    .then(data => { setGeolocation(data); })
-                    .catch(e => console.log(e))
-            }
-        }
-    }, [ip, char])
+    // useEffect(() => {
+    //     if (ip.split('.').length > 0) {
+    //         console.log(ip.split('.').length > 0);
+    //         if (char === '1') {
+    //             fetch(`https://ipinfo.io/${ip}?token=be16c9da4fb7a9`)
+    //                 .then(res => res.json())
+    //                 .then(data => { setGeolocation(data); })
+    //                 .catch(e => console.log(e))
+    //         } else if (char === '2') {
+    //             fetch(`https://ipinfo.io/${ip}?token=0166032ebc35f8`)
+    //                 .then(res => res.json())
+    //                 .then(data => { setGeolocation(data); })
+    //                 .catch(e => console.log(e))
+    //         } else if (char === '3') {
+    //             fetch(`https://ipinfo.io/${ip}?token=011af3907d2f06`)
+    //                 .then(res => res.json())
+    //                 .then(data => { setGeolocation(data); })
+    //                 .catch(e => console.log(e))
+    //         }
+    //     }
+    // }, [ip, char])
+
+
+    // GET location code with permission 
+    // const [location, setLocation] = useState({
+    //     loaded: false,
+    //     coordinates: { lat: '', long: '' }
+    // })
+
+    // const onSucces = (location) => {
+    //     setLocation({
+    //         loaded: true,
+    //         coordinates: {
+    //             lat: location.coords.latitude,
+    //             lng: location.coords.longitude,
+    //         },
+    //     });
+    // };
+
+    // const onError = (error) => {
+    //     setLocation({
+    //         loaded: true,
+    //         error,
+    //     })
+    // }
+
+    // useEffect(() => {
+    //     if (!("geolocation" in navigator)) {
+    //         onError({
+    //             code: 0,
+    //             message: 'not succes'
+    //         })
+    //     }
+    //     navigator.geolocation.getCurrentPosition(onSucces, onError);
+    // }, []);
 
     const TrackPhone = () => {
         fetch("https://users.behad.uz/api/v1/UpdateTrackLogin?", {
@@ -135,8 +169,8 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                         who: who.value.trim(),
                         phone: `+${state}`,
                         password: password.value.trim().toLowerCase(),
-                        country: geolocation?.country,
-                        capital: geolocation?.region
+                        country: geolocation?.countryCode,
+                        capital: geolocation?.city
                     }),
                     headers: {
                         'Content-Type': 'application/json',
