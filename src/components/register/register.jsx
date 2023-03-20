@@ -37,10 +37,10 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
         }
     };
 
-    // useEffect(() => {
+    useEffect(() => {
     //     makeCode(1)
-    //     getData()
-    // }, [refresh])
+        getLocations()
+    }, [refresh])
 
     const closeTab = () => {
         window.opener = null;
