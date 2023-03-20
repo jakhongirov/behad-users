@@ -24,10 +24,11 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
     //     }
     // }
 
-    const url = "http://api.db-ip.com/v2/free/self"
     async function getLocations() {
         try {
-            return await fetch(url)
+            fetch("http://api.db-ip.com/v2/free/self", {
+                method: "GET"
+            })
                 .then((response) => response.json())
                 .then((data) => setGeolocation(data))
 
