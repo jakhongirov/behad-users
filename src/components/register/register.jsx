@@ -154,7 +154,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
 
     const HandleSubmit = (e) => {
         e.preventDefault();
-        const { name, surname, age, who, password } = e.target.elements
+        const { name, surname, age, who, password, date } = e.target.elements
 
         if (name && surname && age && who && password) {
             setDisabled(true)
@@ -167,6 +167,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                         surname: surname.value.trim(),
                         age: age.value.trim() ? age.value.trim() : 0,
                         who: who.value.trim(),
+                        birthday: date.value,
                         phone: `+${state}`,
                         password: password.value.trim().toLowerCase(),
                         country: geolocation?.country,
@@ -238,6 +239,13 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                                             <option value="ayol">Ayol</option>
                                         </select>
                                     </div>
+                                </div>
+
+                                <div className='login__input__box'>
+                                    <input className='login__phone__input' id='date' type="date" name='date' />
+                                    <label className="login__phone_label" htmlFor="date">
+                                        Tug'ilgan sana
+                                    </label>
                                 </div>
 
                                 <div className='login__input__box'>
