@@ -241,11 +241,12 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                                     </div>
                                 </div>
 
+                                <label className="label" htmlFor="date">
+                                    Tug'ilgan sana
+                                </label>
+
                                 <div className='login__input__box'>
-                                    <input className='login__phone__input' id='date' type="date" name='date' />
-                                    <label className="login__phone_label" htmlFor="date">
-                                        Tug'ilgan sana
-                                    </label>
+                                    <input className='login__phone__input' id='date' type="date" name='date' required />
                                 </div>
 
                                 <div className='login__input__box'>

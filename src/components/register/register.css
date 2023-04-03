@@ -94,3 +94,9 @@
     display: block;
     margin-bottom: 10px !important;
 }
+
+.label{
+    display: block;
+    margin-bottom: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif   ;
+}
