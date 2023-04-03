@@ -246,7 +246,7 @@ function Register({ code, setCode, temptoken, app_key, notification_token, setPa
                                 </label>
 
                                 <div className='login__input__box'>
-                                    <input className='login__phone__input' id='date' type="date" name='date' required />
+                                    <input className='login__phone__input' id='date' type="text" name='date' placeholder='2006-04-10' required />
                                 </div>
 
                                 <div className='login__input__box'>
